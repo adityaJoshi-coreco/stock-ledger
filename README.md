@@ -1,70 +1,78 @@
-# Getting Started with Create React App
+# Stock Ledger App
+
+Welcome to the **Stock Ledger App**! This React app helps you track your stock investments, calculate profits/losses, and visualize your portfolio with charts. It’s built using **Create React App** and includes features like notifications, stock entry tracking, and data visualization.
+
+## Features
+
+- **Track Stock Purchases**: Add entries with stock name, purchase price, quantity, and selling price.
+- **Dynamic Notifications**: Get funny error or success notifications based on your inputs.
+- **Profit/Loss Calculation**: Automatically calculates profit/loss, amount, and ROI.
+- **Data Visualization**: Visualize your stock portfolio with:
+  - Line charts showing ROI and Profit/Loss over time.
+  - Pie chart for portfolio distribution.
+  - Bar chart for ROI comparison.
+- **CSV Export**: Export your stock ledger as a CSV file for external use.
+
+## Getting Started
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+### Installation
+
+Clone the repository to your local machine:
+
+```bash
+git clone https://github.com/adityaJoshi-coreco/stock-ledger.git
+cd stock-ledger
+npm install
+
 ## Available Scripts
 
-In the project directory, you can run:
+In the project directory, you can run the following commands:
 
 ### `npm start`
-
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
-
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+Runs the app in development mode.  
+Open [http://localhost:3000](http://localhost:3000) in your browser to view the app.  
+The page will reload when you make changes, and you'll see any lint errors in the console.
 
 ### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Launches the test runner in interactive watch mode.  
+For more information, refer to the section on [running tests](https://facebook.github.io/create-react-app/docs/running-tests).
 
 ### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Builds the app for production and outputs it in the `build` folder.  
+The build is optimized for performance and is ready to be deployed.  
+For more information on deployment, visit the [deployment docs](https://facebook.github.io/create-react-app/docs/deployment).
 
 ### `npm run eject`
+**Note:** This is a one-way operation. Once you eject, you can’t go back!  
+If you're looking to customize your project configuration (like Babel, Webpack, ESLint), you can run this command. However, for most use cases, you don’t need to eject.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+---
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Features in Detail
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+### Stock Ledger Input
+You can add entries by filling out a form with the following fields:
+- **Stock Name**: The name of the stock.
+- **Buy Price**: The price at which you bought the stock.
+- **Quantity**: The number of stocks purchased.
+- **Sell Price or Current Price**: The selling price or current stock price for profit/loss calculation.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+### Notifications
+The app shows funny and interactive notifications in case of invalid inputs. For example:
+- "Oops, looks like you went a little rogue there!"
+- "Hold up! Numbers don't lie... but you sure did!"
 
-## Learn More
+### Data Visualization
+- **ROI Line Chart**: Shows the Return on Investment (ROI) percentage for each stock entry.
+- **Profit/Loss Line Chart**: Shows the profit/loss for each stock entry.
+- **Portfolio Distribution Pie Chart**: Displays a pie chart visualizing your stock portfolio by quantity.
+- **ROI Bar Chart**: Compares the ROI for each stock entry.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### CSV Export
+You can export your stock ledger as a CSV file for easier analysis or sharing. Simply click the **Export CSV** button to download a CSV file with all your stock entries.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+---
+This project is licensed under the MIT License - see the LICENSE file for details.
 
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
