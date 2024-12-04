@@ -33,7 +33,6 @@ In the project directory, you can run the following commands:
 ### `npm start`
 Runs the app in development mode.  
 Open [http://localhost:3000](http://localhost:3000) in your browser to view the app.  
-The page will reload when you make changes, and you'll see any lint errors in the console.
 
 ### `npm test`
 Launches the test runner in interactive watch mode.  
@@ -46,7 +45,6 @@ For more information on deployment, visit the [deployment docs](https://facebook
 
 ### `npm run eject`
 **Note:** This is a one-way operation. Once you eject, you can’t go back!  
-If you're looking to customize your project configuration (like Babel, Webpack, ESLint), you can run this command. However, for most use cases, you don’t need to eject.
 
 ---
 
