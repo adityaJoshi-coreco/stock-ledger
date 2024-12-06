@@ -1,12 +1,12 @@
 import './App.css';
 import React, { useState } from 'react';
-import Notification from './notification/Notifications';  // Import the Notification component
+import Notification from './notification/Notifications';
 import CSVExport from './csv/CSVExport';
 import RoiLineChart from './charts/RoiLineChart';
 import ProfitLossLineChart from './charts/ProfitLossLineChart';
 import PortfolioPieChart from './charts/PortfolioPieChart';
 import RoiBarChart from './charts/RoiBarChart';
-
+import StockList from './StockList';
 // Importing necessary Chart.js components
 import { Chart as ChartJS, CategoryScale, LinearScale, PointElement, LineElement, BarElement, ArcElement, Title, Tooltip, Legend } from 'chart.js';
 
@@ -31,10 +31,10 @@ function App() {
   const [stockName, setStockName] = useState('');
   const [entries, setEntries] = useState([]);
   const [useCurrentPrice, setUseCurrentPrice] = useState(false);
-  const [notification, setNotification] = useState(null); // State for notification
-  const [notificationType, setNotificationType] = useState(''); // Success or Error notification type
+  const [notification, setNotification] = useState(null);
+  const [notificationType, setNotificationType] = useState('');
+  const [selectedDate, setSelectedDate] = useState('');  // State for the selected date
 
-  // Funny messages to show in the notification
   const funnyMessages = [
     "Oops, looks like you went a little rogue there!",
     "Hold up! Numbers don't lie... but you sure did!",
@@ -44,7 +44,6 @@ function App() {
     "Stock prices don’t like negative values… neither do we!",
   ];
 
-  // Helper function to ensure the input is a valid positive number
   const isValidPositiveNumber = (value) => {
     return !isNaN(value) && parseFloat(value) > 0;
   };
@@ -52,20 +51,17 @@ function App() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Ensure valid stock name (only letters)
     if (!/^[A-Za-z]+$/.test(stockName)) {
       setNotification(funnyMessages[Math.floor(Math.random() * funnyMessages.length)]);
       setNotificationType('error');
       return;
     }
 
-    // Ensure valid prices (positive numbers only)
     if (!isValidPositiveNumber(buyPrice)) {
       setNotification(funnyMessages[Math.floor(Math.random() * funnyMessages.length)]);
       setNotificationType('error');
       return;
     }
-    // Ensure valid prices (positive numbers only)
     if (!isValidPositiveNumber(quantity)) {
       setNotification(funnyMessages[Math.floor(Math.random() * funnyMessages.length)]);
       setNotificationType('error');
@@ -90,19 +86,15 @@ function App() {
 
       let sell = 0;
       if (useCurrentPrice) {
-        // Use current price
         sell = parseFloat(currentPrice);
       } else {
-        // Use selling price
         sell = parseFloat(sellPrice);
       }
 
-      // Calculate Profit/Loss, Amount, and ROI
       const profit = (sell - buy) * qty;
       const totalAmount = buy * qty;
       const roiPercentage = ((profit / totalAmount) * 100).toFixed(2);
 
-      // Create an entry
       const newEntry = {
         stockName,
         buyPrice: buy,
@@ -113,6 +105,7 @@ function App() {
         amount: totalAmount,
         roi: roiPercentage,
         isCurrentPrice: useCurrentPrice,
+        date: selectedDate,  // Include the date in the entry
       };
 
       setEntries([...entries, newEntry]);
@@ -123,11 +116,9 @@ function App() {
     }
   };
 
-  // Calculate Total Profit and Loss
   const totalPnL = entries.reduce((acc, entry) => acc + entry.profit, 0).toFixed(2);
   const averageROI = (entries.reduce((acc, entry) => acc + parseFloat(entry.roi), 0) / entries.length).toFixed(2);
 
-  // Prepare chart data
   const chartData = {
     labels: entries.map(entry => entry.stockName),
     datasets: [
@@ -188,7 +179,6 @@ function App() {
 
   return (
     <div className="container mx-auto p-6">
-      {/* Notification Component */}
       <Notification message={notification} type={notificationType} onClose={() => setNotification(null)} />
 
       <h1 className="text-3xl mb-4">Stock Ledger</h1>
@@ -227,7 +217,6 @@ function App() {
           />
         </div>
 
-        {/* Toggle for Selling Price vs Current Price */}
         <div className="flex items-center space-x-2">
           <label htmlFor="priceToggle" className="block">Use Current Price</label>
           <input
@@ -238,7 +227,6 @@ function App() {
           />
         </div>
 
-        {/* Show input for Sell Price or Current Price based on the toggle */}
         {useCurrentPrice ? (
           <div>
             <label htmlFor="currentPrice" className="block">Current Price</label>
@@ -265,20 +253,33 @@ function App() {
           </div>
         )}
 
+        {/* Minimalist Date Picker */}
+        <div>
+          <label htmlFor="selectedDate" className="block">Date</label>
+          <input
+            type="date"
+            id="selectedDate"
+            value={selectedDate}
+            onChange={(e) => setSelectedDate(e.target.value)}
+            className="p-2 border rounded w-full"
+          />
+        </div>
+
         <button type="submit" className="bg-blue-500 text-white p-2 rounded w-full">
           Add Entry
         </button>
       </form>
 
-      {/* Entries and chart rendering */}
       {entries.length > 0 && (
         <>
+          <StockList entries={entries} /> 
           <div className="mt-4">
             <h2 className="text-xl font-bold">Total Profit/Loss</h2>
             <p className={`text-2xl font-bold ${totalPnL < 0 ? 'text-red-500' : 'text-green-500'}`}>
               {totalPnL < 0 ? `- ₹${Math.abs(totalPnL)}` : `₹${totalPnL}`}
             </p>
           </div>
+          
 
           <div className="mt-6 grid grid-cols-1 md:grid-cols-2 gap-6">
             <RoiLineChart data={chartData} />
